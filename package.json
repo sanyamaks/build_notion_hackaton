@@ -1,0 +1,21 @@
+{
+  "name": "build_notions_hackaton",
+  "version": "1.0.0",
+  "description": "Hackathon among students Yandex.Praktikum",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanyamaks/build_notion_hackaton.git"
+  },
+  "author": "students Yandex.Praktikum",
+  "bugs": {
+    "url": "https://github.com/sanyamaks/build_notion_hackaton/issues"
+  },
+  "homepage": "https://github.com/sanyamaks/build_notion_hackaton#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1",
+    "prettier": "^2.0.5"
+  }
+}
