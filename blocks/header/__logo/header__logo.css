@@ -1,0 +1,8 @@
+.header__logo {
+  width: 70px;
+  height: 70px;
+  background-image: url('../../../static/images/main_icon-jpg-copy.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 52px;
+}

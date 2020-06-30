@@ -1,0 +1,8 @@
+@import url(./__logo/header__logo.css);
+@import url(./__title/header__title.css);
+
+.header {
+  border-bottom: 1px solid #E5E5E5;
+  margin-bottom: 52px;
+  padding-bottom: 34px;
+}

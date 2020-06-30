@@ -1,0 +1,9 @@
+.article__text {
+  font-size: 14px;
+  line-height: 24px;
+  margin: 0 0 24px;
+}
+
+.article__text:last-of-type {
+  margin: 0;
+}
