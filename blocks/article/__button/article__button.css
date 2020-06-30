@@ -8,4 +8,14 @@
   height: 20px;
   border-radius: 2px;
   cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+.article__button:hover {
+  box-shadow: 0 0 3px #ECECEC;
+}
+
+.article__button:active {
+  box-shadow: 0 0 5px #ECECEC;
 }

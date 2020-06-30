@@ -5,9 +5,4 @@
 
 .article {
   position: relative;
-  margin-bottom: 38px;
-}
-
-.article:last-of-type {
-  margin-bottom: 0;
 }
