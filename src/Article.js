@@ -1,9 +1,11 @@
 class Article {
-  constructor(articleData) {
+  constructor(articleData, localStorageAPI) {
     this.articleData = articleData;
+    this.localStorageApi = localStorageAPI;
   }
 
   createArticle = () => {
+    console.log(this.articleData);
     const articleContentMarkup = `
     <div class="article__buttons-container">
       <button class="article__button article__button_type_title"></button>
@@ -26,28 +28,39 @@ class Article {
     });
 
     article.insertAdjacentHTML("beforeend", articleTextElements.join(""));
-
+    this.setEventListeners(article);
     return article;
   };
 
-  setEventListeners(buttonTitle, buttonText, buttonRemove, buttonMove) {
-    buttonTitle.addEventListener("click", this.editTitle);
-    buttonText.addEventListener("click", this.editText);
-    buttonRemove.addEventListener("click", this.editRemove);
-    buttonMove.addEventListener("click", this.editMove);
+  setEventListeners(article) {
+    article.querySelector(".article__button_type_title").addEventListener("click", this.editTitle);
+    article.querySelector(".article__button_type_text").addEventListener("click", this.editText);
+    article.querySelector(".article__button_type_delete").addEventListener("click", this.editRemove);
+    article.querySelector(".article__button_type_move").addEventListener("click", this.editMove);
   }
 
-  editTitle() {
-    console.log("editTitle");
+  removeEventListeners(article) {
+    article.querySelector(".article__button_type_title").removeEventListener("click", this.editTitle);
+    article.querySelector(".article__button_type_text").removeEventListener("click", this.editText);
+    article.querySelector(".article__button_type_delete").removeEventListener("click", this.editRemove);
+    article.querySelector(".article__button_type_move").removeEventListener("click", this.editMove);
   }
+
+  editTitle = () => {
+    this.localStorageApi.addDataItem({},this.articleData.id);
+  };
 
   editText() {
     console.log("editText");
   }
 
-  editRemove() {
-    console.log("editRemove");
-  }
+  editRemove = (event) => {
+    const parent = event.target.closest(".articles-container");
+    const child = event.target.closest(".article");
+    this.removeEventListeners(child);
+    parent.removeChild(child);
+    this.localStorageApi.removeDataItem(this.articleData.id);
+  };
 
   editMove() {
     console.log("editMove");
