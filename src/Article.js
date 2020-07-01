@@ -3,55 +3,32 @@ class Article {
     this.articleData = articleData;
   }
 
-  createText(article, body) {
-    const articleText = document.createElement("p");
-    articleText.classList.add("article__text");
-    articleText.textContent = body;
-    article.appendChild(articleText);
-  }
+  createArticle = () => {
+    const articleContentMarkup = `
+    <div class="article__buttons-container">
+      <button class="article__button article__button_type_title"></button>
+      <button class="article__button article__button_type_text"></button>
+      <button class="article__button article__button_type_delete"></button>
+      <button class="article__button article__button_type_move"></button>
+    </div>
+    <div class="article__title" contenteditable="true" data-placeholder="Заголовок статьи"></div>
+  `;
 
-  createArticle() {
-    const { title, body } = this.articleData;
     const article = document.createElement("article");
-    const articleTitle = document.createElement("h2");
-    const articleButtonsContainer = document.createElement("div");
-    const articleButtonTitle = document.createElement("button");
-    const articleButtonText = document.createElement("button");
-    const articleButtonRemove = document.createElement("button");
-    const articleButtonMove = document.createElement("button");
-    body.forEach((item) => {
-      this.createText(article, item);
+    article.classList.add("article", "articles-container__article");
+    article.insertAdjacentHTML("afterbegin", articleContentMarkup);
+
+    const articleTitle = article.querySelector(".article__title");
+    articleTitle.textContent = this.articleData.articleTitle;
+
+    const articleTextElements = this.articleData.articleTexts.map((text) => {
+      return `<div class="article__text" contenteditable="true" data-placeholder="Текст статьи">${text}</div>`;
     });
 
-    article.classList.add("article");
-    article.classList.add("articles-container__article");
-    articleTitle.classList.add("article__title");
-    articleButtonsContainer.classList.add("article__buttons-container");
-    articleButtonTitle.classList.add("article__button");
-    articleButtonTitle.classList.add("article__button_type_title");
-    articleButtonText.classList.add("article__button");
-    articleButtonText.classList.add("article__button_type_text");
-    articleButtonRemove.classList.add("article__button");
-    articleButtonRemove.classList.add("article__button_type_delete");
-    articleButtonMove.classList.add("article__button");
-    articleButtonMove.classList.add("article__button_type_move");
+    article.insertAdjacentHTML("beforeend", articleTextElements.join(""));
 
-    articleTitle.textContent = title;
-
-    article.appendChild(articleTitle);
-    article.appendChild(articleButtonsContainer);
-    articleButtonsContainer.appendChild(articleButtonTitle);
-    articleButtonsContainer.appendChild(articleButtonText);
-    articleButtonsContainer.appendChild(articleButtonRemove);
-    articleButtonsContainer.appendChild(articleButtonMove);
-    this.setEventListeners(
-      articleButtonTitle,
-      articleButtonText,
-      articleButtonRemove,
-      articleButtonMove
-    );
     return article;
-  }
+  };
 
   setEventListeners(buttonTitle, buttonText, buttonRemove, buttonMove) {
     buttonTitle.addEventListener("click", this.editTitle);
@@ -60,19 +37,19 @@ class Article {
     buttonMove.addEventListener("click", this.editMove);
   }
 
-  editTitle(){
+  editTitle() {
     console.log("editTitle");
   }
 
-  editText(){
+  editText() {
     console.log("editText");
   }
 
-  editRemove(){
+  editRemove() {
     console.log("editRemove");
   }
 
-  editMove(){
+  editMove() {
     console.log("editMove");
   }
 }

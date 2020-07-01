@@ -1,7 +1,14 @@
 .article__text {
+  width: 100%;
   font-size: 14px;
   line-height: 24px;
   margin: 0 0 24px;
+  outline: 0;
+}
+
+.article__text:empty:before {
+  content:attr(data-placeholder);
+  color:lightgray;
 }
 
 .article__text:last-of-type {

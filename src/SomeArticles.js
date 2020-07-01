@@ -9,6 +9,7 @@ class SomeArticles {
     console.log(articles);
     this.articles = articles;
     this.articles.forEach((article) => {
+      console.log(article);
       this.articleContainer.appendChild(this.createArticle(article));
     });
   }

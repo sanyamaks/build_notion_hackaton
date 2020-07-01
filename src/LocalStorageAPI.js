@@ -3,14 +3,23 @@ class LocalStorageAPI {
     this.data = null;
   }
 
-  setLocalData(articles) {
-    this.data = articles;
+  setLocalData(data) {
+    this.data = data;
     localStorage.setItem("data", JSON.stringify(this.data));
   }
 
-  getLocalData() {
+  updateLocalData() {
     this.data = JSON.parse(localStorage.getItem("data"));
-    return this.data;
+  }
+
+  getLocalArticles() {
+    console.log(this.data);
+    return JSON.parse(localStorage.getItem("data")).articles;
+  }
+
+  getLocalHeaderTitle() {
+    console.log(this.data);
+    return JSON.parse(localStorage.getItem("data")).headerTitle;
   }
 
   hasLocalData() {
@@ -18,20 +27,32 @@ class LocalStorageAPI {
   }
 
   addDataItem(article, pos) {
-    this.data = [
-      ...this.data.slice(0, pos),
-      article,
-      ...this.data.slice(pos, this.data.length),
-    ];
-    this.setLocalData(this.data);
+    this.data = {
+      headerTitle: this.data.headerTitle,
+      articles: [
+        ...this.data.articles.slice(0, pos),
+        article,
+        ...this.data.articles.slice(pos, this.data.length),
+      ],
+    };
   }
 
   updateDataItem(article, pos) {
-    this.data = [
-      ...this.data.slice(0, pos - 1),
-      article,
-      ...this.data.slice(pos, this.data.length),
-    ];
+    this.data = {
+      headerTitle: this.data.headerTitle,
+      articles: [
+        ...this.data.articles.slice(0, pos - 1),
+        article,
+        ...this.data.articles.slice(pos, this.data.length),
+      ],
+    };
+    this.setLocalData(this.data);
+  }
+
+  updateHeaderTitle(title) {
+    console.log(title);
+    this.data = { headerTitle: title, articles: [...this.data.articles] };
+    console.log(this.data);
     this.setLocalData(this.data);
   }
 }
