@@ -2,7 +2,7 @@ const header = document.querySelector(".header");
 const articlesContainer = document.querySelector(".articles-container");
 
 const createArticle = (article) => {
-  const articleObj = new Article(article);
+  const articleObj = new Article(article, localStorageAPI, createArticle);
   return articleObj.createArticle();
 };
 const renderHeaderTitle = (title) => {
@@ -11,7 +11,6 @@ const renderHeaderTitle = (title) => {
 };
 
 const headerTitleHandler = (event) => {
-  console.log(event.target.textContent);
   localStorageAPI.updateHeaderTitle(event.target.textContent);
 };
 

@@ -13,12 +13,10 @@ class LocalStorageAPI {
   }
 
   getLocalArticles() {
-    console.log(this.data);
     return JSON.parse(localStorage.getItem("data")).articles;
   }
 
   getLocalHeaderTitle() {
-    console.log(this.data);
     return JSON.parse(localStorage.getItem("data")).headerTitle;
   }
 
@@ -26,7 +24,11 @@ class LocalStorageAPI {
     return !!localStorage["data"];
   }
 
-  addDataItem(article, pos) {
+  addDataItem(article, id) {
+    const pos =
+      this.data.articles.indexOf(
+        ...this.data.articles.filter((item) => item.id === id)
+      ) + 1;
     this.data = {
       headerTitle: this.data.headerTitle,
       articles: [
@@ -35,6 +37,8 @@ class LocalStorageAPI {
         ...this.data.articles.slice(pos, this.data.length),
       ],
     };
+
+    this.setLocalData(this.data);
   }
 
   updateDataItem(article, pos) {
@@ -49,10 +53,16 @@ class LocalStorageAPI {
     this.setLocalData(this.data);
   }
 
+  removeDataItem(id) {
+    this.data = {
+      headerTitle: this.data.headerTitle,
+      articles: this.getLocalArticles().filter((item) => item.id !== id),
+    };
+    this.setLocalData(this.data);
+  }
+
   updateHeaderTitle(title) {
-    console.log(title);
     this.data = { headerTitle: title, articles: [...this.data.articles] };
-    console.log(this.data);
     this.setLocalData(this.data);
   }
 }
