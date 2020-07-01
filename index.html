@@ -1,15 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="./vendor/normalize.css">
-  <link rel="stylesheet" href="./pages/index.css">
+  <meta charset="UTF-8"/>
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  />
+  <link rel="stylesheet" href="./vendor/normalize.css"/>
+  <link rel="stylesheet" href="./pages/index.css"/>
   <title>Notion Hackaton 24/1</title>
 </head>
-<body>
+<body class="page">
+<header class="header">
+  <div class="header__logo"></div>
+</header>
 
-<script src="./scripts/script.js"></script>
+<main class="articles-container">
+<!--    <article class="article articles-container__article">
+      <div class="article__title" contenteditable="true" data-placeholder="Заголовок статьи"></div>
+      <div class="article__text" contenteditable="true" data-placeholder="Текст статьи"></div>
+      <div class="article__buttons-container">
+        <button class="article__button article__button_type_title"></button>
+        <button class="article__button article__button_type_text"></button>
+        <button class="article__button article__button_type_delete"></button>
+        <button class="article__button article__button_type_move"></button>
+      </div>
+   </article> -->
+</main>
+<script src="./src/DataArticles.js"></script>
+<script src="src/LocalStorageAPI.js"></script>
+<script src="./src/Article.js"></script>
+<script src="./src/SomeArticles.js"></script>
+<script type="module" src="./src/index.js"></script>
 </body>
 </html>

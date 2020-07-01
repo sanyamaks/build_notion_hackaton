@@ -1,0 +1,8 @@
+@import url(./__text/article__text.css);
+@import url(./__title/article__title.css);
+@import url(./__buttons-container/article__buttons-container.css);
+@import url(./__button/article__button.css);
+
+.article {
+  position: relative;
+}

@@ -1,0 +1,7 @@
+.articles-container__article {
+    margin-bottom: 38px;
+}
+
+.articles-container__article:last-of-type {
+    margin-bottom: 0;
+}

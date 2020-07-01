@@ -1,0 +1,21 @@
+@import url(./_type/article__button_type_delete.css);
+@import url(./_type/article__button_type_move.css);
+@import url(./_type/article__button_type_text.css);
+@import url(./_type/article__button_type_title.css);
+
+.article__button {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+.article__button:hover {
+  box-shadow: 0 0 3px #ECECEC;
+}
+
+.article__button:active {
+  box-shadow: 0 0 5px #ECECEC;
+}
