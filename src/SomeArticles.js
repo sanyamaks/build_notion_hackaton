@@ -1,14 +1,16 @@
 class SomeArticles {
-  constructor(articleContainer, articles, createArticle) {
+  constructor(articleContainer, createArticle) {
     this.articleContainer = articleContainer;
-    this.articles = articles;
+    this.articles = null;
     this.createArticle = createArticle;
   }
 
-  renderArticles() {
-    this.articles.forEach((item) => {
-      const article = this.createArticle(item);
-      this.articleContainer.appendChild(article.createArticle());
+  renderArticles(articles) {
+    console.log(articles);
+    this.articles = articles;
+    this.articles.forEach((article) => {
+      console.log(article);
+      this.articleContainer.appendChild(this.createArticle(article));
     });
   }
 }

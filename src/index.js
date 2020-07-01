@@ -59,23 +59,13 @@ const initHeaderTitle = () => {
   headerTitle.textContent = storage.headerTitle;
 };
 
-// Использовать в классе someArticles?
-const initArticles = () => {
-  storage.articles.forEach((data) => {
-    articlesContainer.append(createArticle(data));
-  });
-};
+someArticles.renderArticles(localStorageAPI.getLocalArticles());
 
-const initAppData = () => {
-  Object.entries(defaultData).forEach(([key, value]) => {
-    if (storage.hasOwnProperty(key)) {
-      return;
-    }
+renderHeaderTitle(localStorageAPI.getLocalHeaderTitle());
 
-    storage[key] = value;
-  });
-};
+// localStorageAPI.addDataItem({ articleTitle: "title", articleTexts: ["body"] }, 1);
+// localStorageAPI.updateDataItem({ articleTitle: "title1", articleTexts: ["body1"] }, 2);
 
-initAppData();
-initHeaderTitle();
-initArticles();
+header
+  .querySelector(".header__title")
+  .addEventListener("input", headerTitleHandler);
