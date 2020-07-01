@@ -1,12 +1,4 @@
-/* const articlesContainer = document.querySelector(".articles-container");
-
-const someArticles = new SomeArticles(articlesContainer, dataArticles, createArticle);
-function createArticle(article) {
-  const articleObj = new Article(article);
-  return articleObj
-}
-
-someArticles.renderArticles(); */
+import Article from './Article.js';
 
 // Пример дефолтной даты
 const defaultData = {
@@ -30,42 +22,39 @@ const headerTitle = document.querySelector('.header__title');
 const articlesContainer = document.querySelector('.articles-container');
 
 // функции
+const updateArticleData = () => {
+  // LocalStorageAPI.updateItem();
+};
+
+const addArticleData = () => {
+  // LocalStorageAPI.addDataItem();
+};
+
+const deleteArticleData = () => {
+  // LocalStorageAPI.deleteData();
+};
+
 const createArticle = (data) => {
-  const articleContentMarkup = `
-    <div class="article__buttons-container">
-      <button class="article__button article__button_type_title"></button>
-      <button class="article__button article__button_type_text"></button>
-      <button class="article__button article__button_type_delete"></button>
-      <button class="article__button article__button_type_move"></button>
-    </div>
-    <div class="article__title" contenteditable="true" data-placeholder="Заголовок статьи"></div>
-  `;
+  const article = new Article(data, updateArticleData, addArticleData, deleteArticleData);
 
-  const article = document.createElement('article');
-  article.classList.add('article', 'articles-container__article');
-  article.insertAdjacentHTML('afterbegin', articleContentMarkup);
-
-  const articleTitle = article.querySelector('.article__title');
-  articleTitle.textContent = data.articleTitle;
-
-  const articleTextElements = data.articleTexts.map((text) => {
-    return `<div class="article__text" contenteditable="true" data-placeholder="Текст статьи">${text}</div>`;
-  });
-
-  article.insertAdjacentHTML('beforeend', articleTextElements.join(''));
-
-  return article;
+  return article.create();
 };
 
 // обработчики
 const headerTitleHandler = () => {
-  storage.headerTitle = headerTitle.value;
+  storage.headerTitle = headerTitle.textContent;
 };
 
 // слушатели
 headerTitle.addEventListener('input', headerTitleHandler);
+headerTitle.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' || event.key === 'Escape') {
+    document.activeElement.blur()
+    headerTitleHandler();
+  }
+});
 
-// Инициализация
+//  ---- Инициализация ------
 const initHeaderTitle = () => {
   headerTitle.textContent = storage.headerTitle;
 };

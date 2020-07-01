@@ -1,78 +1,77 @@
 class Article {
-  constructor(articleData) {
-    this.articleData = articleData;
+  constructor(data, updateArticleData, addArticleData, deleteArticleData) {
+    this._data = data;
+    this._updateArticleData = updateArticleData;
+    this._addArticleData = addArticleData;
+    this._deleteArticleData = deleteArticleData;
   }
 
-  createText(article, body) {
-    const articleText = document.createElement("p");
-    articleText.classList.add("article__text");
-    articleText.textContent = body;
-    article.appendChild(articleText);
-  }
+  create() {
+    const articleContentMarkup = `
+      <div class="article__buttons-container">
+        <button class="article__button article__button_type_title"></button>
+        <button class="article__button article__button_type_text"></button>
+        <button class="article__button article__button_type_delete"></button>
+        <button class="article__button article__button_type_move"></button>
+      </div>
+      <div class="article__title" contenteditable="true" data-placeholder="Заголовок статьи"></div>
+    `;
+  
+    const article = document.createElement('article');
+    article.classList.add('article', 'articles-container__article');
+    article.insertAdjacentHTML('afterbegin', articleContentMarkup);
+  
+    const articleTitle = article.querySelector('.article__title');
+    articleTitle.textContent = this._data.articleTitle;
+  
+    const articleText = this._data.articleTexts.map((text) => {
+      return `<div class="article__text" contenteditable="true" data-placeholder="Текст статьи">${text}</div>`;
+    }).join('');
+  
+    article.insertAdjacentHTML('beforeend', articleText);
 
-  createArticle() {
-    const { title, body } = this.articleData;
-    const article = document.createElement("article");
-    const articleTitle = document.createElement("h2");
-    const articleButtonsContainer = document.createElement("div");
-    const articleButtonTitle = document.createElement("button");
-    const articleButtonText = document.createElement("button");
-    const articleButtonRemove = document.createElement("button");
-    const articleButtonMove = document.createElement("button");
+    this._articleTitle = articleTitle;
+    this._buttonsContainer = article.querySelector('.article__buttons-container');
+    this._articleTextElements = article.querySelectorAll('.article__text');
+    this._buttonTitle = article.querySelector('.article__button_type_title');
+    this._buttonText = article.querySelector('.article__button_type_text');
+    this._buttonDelete = article.querySelector('.article__button_type_delete');
+    this._buttonMove = article.querySelector('.article__button_type_move');
+  
+    this._setEventListeners();
 
-    article.classList.add("article");
-    article.classList.add("articles-container__article");
-    articleTitle.classList.add("article__title");
-    articleButtonsContainer.classList.add("article__buttons-container");
-    articleButtonTitle.classList.add("article__button");
-    articleButtonTitle.classList.add("article__button_type_title");
-    articleButtonText.classList.add("article__button");
-    articleButtonText.classList.add("article__button_type_text");
-    articleButtonRemove.classList.add("article__button");
-    articleButtonRemove.classList.add("article__button_type_delete");
-    articleButtonMove.classList.add("article__button");
-    articleButtonMove.classList.add("article__button_type_move");
-
-    articleTitle.textContent = title;
-
-    article.appendChild(articleTitle);
-    body.forEach((item) => {
-      this.createText(article, item);
-    });
-    article.appendChild(articleButtonsContainer);
-    articleButtonsContainer.appendChild(articleButtonTitle);
-    articleButtonsContainer.appendChild(articleButtonText);
-    articleButtonsContainer.appendChild(articleButtonRemove);
-    articleButtonsContainer.appendChild(articleButtonMove);
-    this.setEventListeners(
-      articleButtonTitle,
-      articleButtonText,
-      articleButtonRemove,
-      articleButtonMove
-    );
     return article;
+  };
+
+  _setEditTextListeners(element) {
+    element.addEventListener('input', this._updateArticleData);
+    element.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === 'Escape') {
+        document.activeElement.blur()
+        this._updateArticleData();
+      }
+    })
   }
 
-  setEventListeners(buttonTitle, buttonText, buttonRemove, buttonMove) {
-    buttonTitle.addEventListener("click", this.editTitle);
-    buttonText.addEventListener("click", this.editText);
-    buttonRemove.addEventListener("click", this.editRemove);
-    buttonMove.addEventListener("click", this.editMove);
+  _showButtonsHandler() {
+    this._buttonsContainer.style.display = 'block';
+
+    setTimeout(() => {
+      this._buttonsContainer.style.display = 'none';
+    }, 2000);
   }
 
-  editTitle(){
-    console.log("editTitle");
-  }
+  _setEventListeners() {
+    const boundShowButtonsHandler = this._showButtonsHandler.bind(this);
 
-  editText(){
-    console.log("editText");
-  }
+    this._setEditTextListeners(this._articleTitle);
+    this._articleTitle.addEventListener('mouseover', boundShowButtonsHandler);
+    this._articleTextElements.forEach((element) => {
+      this._setEditTextListeners(element);
+      element.addEventListener('mouseover', boundShowButtonsHandler);
+    });
 
-  editRemove(){
-    console.log("editRemove");
-  }
-
-  editMove(){
-    console.log("editMove");
   }
 }
+
+export default Article;
