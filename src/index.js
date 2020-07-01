@@ -2,7 +2,7 @@ const header = document.querySelector(".header");
 const articlesContainer = document.querySelector(".articles-container");
 
 const createArticle = (article) => {
-  const articleObj = new Article(article, localStorageAPI, createArticle);
+  const articleObj = new Article(article, localStorageAPI);
   return articleObj.createArticle();
 };
 const renderHeaderTitle = (title) => {

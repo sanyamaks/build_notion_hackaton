@@ -1,8 +1,7 @@
 class Article {
-  constructor(articleData, localStorageAPI, createArticle) {
+  constructor(articleData, localStorageAPI) {
     this.articleData = articleData;
     this.localStorageApi = localStorageAPI;
-    this.createArticle = createArticle;
   }
 
   createArticle = () => {
@@ -64,7 +63,7 @@ class Article {
 
   editTitle() {
     this.localStorageApi.addDataItem({articleTitle: "title", articleTexts: ["body"] }, this.articleData.id);
-    // document.body.appendChild(this.createArticle({articleTitle: "title", articleTexts: ["body"] }));
+    // document.body.appendChild(this.createArticle1({articleTitle: "title", articleTexts: ["body"] }));
   };
 
   editText() {
