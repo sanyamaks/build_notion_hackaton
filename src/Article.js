@@ -1,11 +1,11 @@
 class Article {
-  constructor(articleData, localStorageAPI) {
+  constructor(articleData, localStorageAPI, createArticle) {
     this.articleData = articleData;
     this.localStorageApi = localStorageAPI;
+    this.createArticle = createArticle;
   }
 
   createArticle = () => {
-    console.log(this.articleData);
     const articleContentMarkup = `
     <div class="article__buttons-container">
       <button class="article__button article__button_type_title"></button>
@@ -33,21 +33,38 @@ class Article {
   };
 
   setEventListeners(article) {
-    article.querySelector(".article__button_type_title").addEventListener("click", this.editTitle);
-    article.querySelector(".article__button_type_text").addEventListener("click", this.editText);
-    article.querySelector(".article__button_type_delete").addEventListener("click", this.editRemove);
-    article.querySelector(".article__button_type_move").addEventListener("click", this.editMove);
+    article
+      .querySelector(".article__button_type_title")
+      .addEventListener("click", this.editTitle);
+    article
+      .querySelector(".article__button_type_text")
+      .addEventListener("click", this.editText);
+    article
+      .querySelector(".article__button_type_delete")
+      .addEventListener("click", this.editRemove);
+    article
+      .querySelector(".article__button_type_move")
+      .addEventListener("click", this.editMove);
   }
 
   removeEventListeners(article) {
-    article.querySelector(".article__button_type_title").removeEventListener("click", this.editTitle);
-    article.querySelector(".article__button_type_text").removeEventListener("click", this.editText);
-    article.querySelector(".article__button_type_delete").removeEventListener("click", this.editRemove);
-    article.querySelector(".article__button_type_move").removeEventListener("click", this.editMove);
+    article
+      .querySelector(".article__button_type_title")
+      .removeEventListener("click", this.editTitle);
+    article
+      .querySelector(".article__button_type_text")
+      .removeEventListener("click", this.editText);
+    article
+      .querySelector(".article__button_type_delete")
+      .removeEventListener("click", this.editRemove);
+    article
+      .querySelector(".article__button_type_move")
+      .removeEventListener("click", this.editMove);
   }
 
-  editTitle = () => {
-    this.localStorageApi.addDataItem({},this.articleData.id);
+  editTitle() {
+    this.localStorageApi.addDataItem({articleTitle: "title", articleTexts: ["body"] }, this.articleData.id);
+    // document.body.appendChild(this.createArticle({articleTitle: "title", articleTexts: ["body"] }));
   };
 
   editText() {

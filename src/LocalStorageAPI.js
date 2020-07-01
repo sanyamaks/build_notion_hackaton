@@ -24,7 +24,11 @@ class LocalStorageAPI {
     return !!localStorage["data"];
   }
 
-  addDataItem(article, pos) {
+  addDataItem(article, id) {
+    const pos =
+      this.data.articles.indexOf(
+        ...this.data.articles.filter((item) => item.id === id)
+      ) + 1;
     this.data = {
       headerTitle: this.data.headerTitle,
       articles: [
@@ -33,6 +37,8 @@ class LocalStorageAPI {
         ...this.data.articles.slice(pos, this.data.length),
       ],
     };
+
+    this.setLocalData(this.data);
   }
 
   updateDataItem(article, pos) {
