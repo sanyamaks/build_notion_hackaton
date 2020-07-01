@@ -19,9 +19,6 @@ class Article {
     const articleButtonText = document.createElement("button");
     const articleButtonRemove = document.createElement("button");
     const articleButtonMove = document.createElement("button");
-    body.forEach((item) => {
-      this.createText(article, item);
-    });
 
     article.classList.add("article");
     article.classList.add("articles-container__article");
@@ -39,6 +36,9 @@ class Article {
     articleTitle.textContent = title;
 
     article.appendChild(articleTitle);
+    body.forEach((item) => {
+      this.createText(article, item);
+    });
     article.appendChild(articleButtonsContainer);
     articleButtonsContainer.appendChild(articleButtonTitle);
     articleButtonsContainer.appendChild(articleButtonText);

@@ -3,6 +3,10 @@
   font-size: 42px;
   line-height: 51px;
   margin: 0;
-  outline: none;
-  border: none;
+  outline: 0;
+}
+
+.header__title:empty:before {
+  content:attr(data-placeholder);
+  color: lightgray;
 }
